@@ -1,6 +1,6 @@
 {
   "name": "nicklammchatbox",
-  "version": "0.1",
+  "version": "0.1.1",
   "description": "A chatbox app",
   "engines": {
     "node": "6.9.2"
@@ -20,5 +20,5 @@
     "heroku",
     "express"
   ],
-  "license": "GNU"
+  "license": "GPL-3.0"
 }
