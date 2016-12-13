@@ -10,7 +10,9 @@
     "start": "node main.js"
   },
   "dependencies": {
-    "express": "4.13.3"
+    "bootstrap": "^4.0.0-alpha.5",
+    "express": "4.13.3",
+    "socket.io": "^1.7.2"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,8 @@
   "keywords": [
     "node",
     "heroku",
-    "express"
+    "express",
+    "socket.io"
   ],
   "license": "GPL-3.0"
 }
