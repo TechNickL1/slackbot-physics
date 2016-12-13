@@ -17,7 +17,9 @@ io.on('connection', function(socket){
   console.log("user connected");
   socket.emit("server message", "Please enter your username")
   var usr;
+  console.log("usr: " + usr);
   socket.on("submission", function(msg){
+    console.log("input recieved: " + msg);
     var regex = /(<([^>]+)>)/ig;
     msg = msg.replace(regex, "");
     if(usr===undefined){
