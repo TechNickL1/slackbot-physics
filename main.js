@@ -8,6 +8,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static("public"));
 app.use("/bootstrap/css", express.static("node_modules/bootstrap/dist/css"));
 app.use("/bootstrap/js", express.static("node_modules/bootstrap/dist/js"));
+app.use("/jq", express.static("node_modules/jquery/dist"));
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + "/chatbox.html");
@@ -17,8 +18,6 @@ io.on('connection', function(socket){
   console.log("user connected");
   socket.emit("server message", "Please enter your username")
   var usr;
-  console.log("port " + process.env.PORT);
-  console.log("previous port " + app.get("port"));
   socket.on("submission", function(msg){
     console.log("input recieved: " + msg);
     var regex = /(<([^>]+)>)/ig;

@@ -1,8 +1,8 @@
 var socket = io(); //connect
-$('form').submit(function(){
+$('form').submit(function(e){
   socket.emit("submission", $('#m').val());
   $('#m').val('');
-    return false;
+  return false;
 });
 socket.on("submission", function(usr, msg){
   $('#messages').append($('<li>').html("<name>"+usr+": </name>" + msg));
