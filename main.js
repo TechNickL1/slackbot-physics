@@ -14,7 +14,7 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   console.log("user connected");
-  io.emit("server message", 'Please enter your username')
+  socket.emit("server message", 'Please enter your username')
   var usr;
   socket.on('submission', function(msg){
     if(usr===undefined){
