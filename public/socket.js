@@ -5,7 +5,7 @@ $('form').submit(function(){
     return false;
 });
 socket.on("submission", function(usr, msg){
-  $('#messages').append($('<li>').html("<name>"+usr+": </name>" + $(msg).text()));
+  $('#messages').append($('<li>').html("<name>"+usr+": </name>" + msg));
 });
 socket.on("server message", function(msg){
   $('#messages').append($('<li class="svrmsg">').text(msg));

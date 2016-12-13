@@ -20,8 +20,6 @@ io.on('connection', function(socket){
   socket.on("submission", function(msg){
     var regex = /(<([^>]+)>)/ig;
     msg = msg.replace(regex, "");
-    console.log(msg);
-    console.log(msg.replace(regex, ""))
     if(usr===undefined){
       if(msg===""){
         socket.emit("server message", "Invalid username. Please try again.");
