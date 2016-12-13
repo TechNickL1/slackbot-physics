@@ -5,25 +5,35 @@ var io = require('socket.io')(http); //init socket.io
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static('public'));
+app.use(express.static("public"));
+app.use("/bootstrap/css", express.static("node_modules/bootstrap/dist/css"));
+app.use("/bootstrap/js", express.static("node_modules/bootstrap/dist/js"));
 
 app.get('/', function(req, res){
-  console.log('http req recieved');
-  res.sendFile(__dirname + '/chatbox.html', global=__dirname);
+  res.sendFile(__dirname + "/chatbox.html");
 });
 
 io.on('connection', function(socket){
   console.log("user connected");
-  socket.emit("server message", 'Please enter your username')
+  socket.emit("server message", "Please enter your username")
   var usr;
-  socket.on('submission', function(msg){
+  socket.on("submission", function(msg){
+    var regex = /(<([^>]+)>)/ig;
+    msg = msg.replace(regex, "");
+    console.log(msg);
+    console.log(msg.replace(regex, ""))
     if(usr===undefined){
-      usr = msg;
-      socket.emit("server message", "Welcome " + usr + "!");
-      socket.broadcast.emit("server message", "User "  + usr + " connected.");
-      console.log("user chose name " + usr);
+      if(msg===""){
+        socket.emit("server message", "Invalid username. Please try again.");
+      }else{
+        usr = msg;
+        socket.emit("name set");
+        socket.emit("server message", "Welcome " + usr + "!");
+        socket.broadcast.emit("server message", "User "  + usr + " connected.");
+        console.log("user chose name " + usr);
+      }
     }else{
-      io.emit('submission', usr + ": "+ msg);
+      io.emit("submission", usr, msg);
     }
   });
   socket.on('disconnect', function(){
