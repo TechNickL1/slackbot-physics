@@ -1,1 +1,1 @@
-This is a basic web chat box application built to showcase my own abilities. (c) Nick Lamm 2016
+This is a basic Slack bot for converting units and other misc functions. (c) Nick Lamm 2016
