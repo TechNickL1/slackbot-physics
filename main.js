@@ -27,6 +27,8 @@ app.post('/', function (req, res) {
   if(req.body.command==="/convert"){
     var msg=req.body.text;
     var params = msg.split(" ");
+    console.log(params);
+    console.log(convert(params[0]).from(params[1].to(params[2]));
   }
 })
 
