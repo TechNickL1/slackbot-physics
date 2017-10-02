@@ -6,7 +6,7 @@ var io = require('socket.io')(http); //init socket.io
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
 
 app.post('/', function (req, res) {
   //const msg=req.body.Body
