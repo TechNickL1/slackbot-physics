@@ -25,15 +25,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/', function (req, res) {
   console.log("Incoming POST request:")
   console.log(req.body)
+  res.set("Content-type", "application/json")
   if(req.body.command==="/convert"){
     var msg=req.body.text;
+    var regex = "/.*[0-9]+\.*[0-9]+ .*/ig"
     var params = msg.split(" ");
-    if(params[0] === "help"){
-      console.log("help called");
+    if(msg !== regex){
+      res.send({"response_type":"ephemeral", "text":"Oops! Something went wrong. Try \"/convert help\" for help."});
+    }else if(params[0] === "help"){
+      res.send({"response_type":"in_channel", "text":"Usage: /convert \"value\" \"units from\" \"units to (optional)\"\nPlease use spaces :)"});
+    }else if(params[2] !== null){
+      var ans = convert(params[0]).from(params[1]).to(params[2]);
+      res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans + " " + params[2]});
+    }else{
+      var ans = convert(params[0]).from(params[1]).toBest();
+      res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans});
     }
-    var ans = convert(params[0]).from(params[1]).to(params[2]);
-    res.set("Content-type", "application/json")
-    res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans + " " + params[2]});
   }
 })
 
