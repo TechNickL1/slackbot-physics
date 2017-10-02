@@ -9,11 +9,15 @@ app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.json());
 
 app.post('/', function (req, res) {
-  console.log("type= "+req.body.event.type)
-  console.log("content= "+req.body.event.text)
-  if(req.body.type="message"){
-    var msg=req.body.text
-    var regex = /[0-9]+ *ft|feet|foot|in|inch|yard|yd|mi|mile|pound|lb|ton|psi|atm/ig;
+  console.log("Incoming POST request:")
+  console.log("type = "+req.body.event.type)
+  console.log("content = "+req.body.event.text)
+  if(req.body.event.type="message"){
+    var msg=req.body.event.text
+    var regex = /.*[0-9]+ *ft|feet|foot|in|inch|yard|yd|mi|mile|pound|lb|ton|psi|atm.*/ig;
+    if(msg === regex){
+      console.log("unit found")
+    }
   }
 })
 
