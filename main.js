@@ -9,9 +9,8 @@ app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({ extended: false }))
  
 app.post('/', function (req, res) {
-  const msg=req.body.Body
+  //const msg=req.body.Body
   //var regex = /[0-9]+ *ft|feet|foot|in|inch|yard|yd|mi|mile|pound|lb|ton|psi|atm/ig;
-  res.set('Content-Type', 'text/plain')
   res.send(req.body.challenge)
 })
  
