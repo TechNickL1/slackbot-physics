@@ -31,7 +31,7 @@ app.post('/', function (req, res) {
     if(params[0] === "help"){
       console.log("help called");
     }
-    var ans = convert(params[0]).from(params[1]).to(params[2]));
+    var ans = convert(params[0]).from(params[1]).to(params[2]);
     res.set("Content-type", "application/json")
     res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans + " " + params[2]});
   }
