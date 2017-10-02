@@ -27,7 +27,7 @@ app.post('/', function (req, res) {
   if(req.body.command==="/convert"){
     var msg=req.body.text;
     var params = msg.split(" ");
-    if(params[0]) == "help"){
+    if(params[0]) === "help"){
       console.log("help called");
     }
     console.log(convert(params[0]).from(params[1]).to(params[2]));
