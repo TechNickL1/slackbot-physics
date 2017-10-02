@@ -13,11 +13,12 @@
     "bootstrap": "^4.0.0-alpha.5",
     "express": "4.13.3",
     "jquery": "^3.1.1",
-    "socket.io": "^1.7.2"
+    "socket.io": "^1.7.2",
+    "body-parser": "^1.17.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TechNickL1/nicklammchatbox"
+    "url": "https://github.com/TechNickL1/slackbot-physics"
   },
   "keywords": [
     "node",

@@ -1,6 +1,6 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const app = express()
+var express = require('express')
+var bodyParser = require('body-parser')
+var app = express()
 var http = require('http').Server(app); //init server
 var io = require('socket.io')(http); //init socket.io
 
