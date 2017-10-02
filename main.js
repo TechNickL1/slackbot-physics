@@ -7,7 +7,7 @@ var io = require('socket.io')(http); //init socket.io
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 /*app.post('/', function (req, res) {
   console.log("Incoming POST request:")
@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded());
     }
   }
 })*/
+
 app.post('/', function (req, res) {
   console.log("Incoming POST request:")
   console.log(req.body)
@@ -30,7 +31,9 @@ app.post('/', function (req, res) {
     if(params[0] === "help"){
       console.log("help called");
     }
-    console.log(convert(params[0]).from(params[1]).to(params[2]));
+    var ans = convert(params[0]).from(params[1]).to(params[2]));
+    res.set("Content-type", "application/json")
+    res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans + " " + params[2]});
   }
 })
 
