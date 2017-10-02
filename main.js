@@ -1,6 +1,7 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var app = express()
+var convert = require('convert-units')
 var http = require('http').Server(app); //init server
 var io = require('socket.io')(http); //init socket.io
 
@@ -23,6 +24,11 @@ app.use(bodyParser.urlencoded());
 app.post('/', function (req, res) {
   console.log("Incoming POST request:")
   console.log(req.body)
+  if(req.body.command==="/convert"){
+    var msg=req.body.text;
+    var params = msg.split(" ");
+
+  }
 })
 
 http.listen(app.get('port'), function(){
