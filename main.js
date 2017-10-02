@@ -27,7 +27,6 @@ app.post('/', function (req, res) {
   if(req.body.command==="/convert"){
     var msg=req.body.text;
     var params = msg.split(" ");
-
   }
 })
 
