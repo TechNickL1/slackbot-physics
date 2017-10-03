@@ -34,8 +34,12 @@ app.post('/', function (req, res) {
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
     }else if(params.length >= 3 && convert().possibilities().indexOf(params[2]) >= 0){
       console.log("has destination units, and theyre correct");
-      var ans = convert(params[0]).from(params[1]).to(params[2]);
-      res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans + " " + params[2]});
+      try{
+        var ans = convert(params[0]).from(params[1]).to(params[2]);
+        res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans + " " + params[2]});
+      }catch(err){
+          res.send({"response_type":"ephemeral", "text":"Incompatible units, try again."});
+      }
     }else if(params.length >= 3 && !(convert().possibilities().indexOf(params[2]) >= 0)){
       console.log("has destination units, and theyre incorrect");
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
