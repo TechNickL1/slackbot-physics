@@ -19,7 +19,7 @@ app.post('/', function (req, res) {
     var params = msg.split(" ");
     if(params[0] === "help"){
       res.send({"response_type":"ephemeral", "text":"Usage: /convert [value] [units from] [units to (optional)]\nPlease use spaces :)"});
-    }else if(regex.test(msg)){
+    }else if(!regex.test(msg)){
       res.send({"response_type":"ephemeral", "text":"Oops! Something went wrong. Try \"/convert help\" for help."});
     }else if(!(convert().possibilities().indexOf(params[1]) >= 0)){
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
