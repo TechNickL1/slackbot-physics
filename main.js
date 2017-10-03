@@ -21,7 +21,7 @@ app.post('/', function (req, res) {
     var params = msg.split(" ");
     console.log("index of unit in possible units :"+(convert().possibilities().indexOf(params[1])));
     if(params[0] === "help"){
-      res.send({"response_type":"ephemeral", "text":"Usage: /convert [value] [units from] [units to (optional)]\nPlease use spaces :)"});
+      res.send({"response_type":"ephemeral", "text":"Usage: /convert [value] [units from] [units to (optional)]\nPlease use spaces :)\nFor units with exponents, omit the ^. Only simple exponents (cm2 etc) are valid."});
     }else if(!regex.test(msg)){
       res.send({"response_type":"ephemeral", "text":"Oops! Something went wrong. Try \"/convert help\" for help."});
     }else if(!(convert().possibilities().indexOf(params[1]) >= 0)){
