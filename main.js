@@ -2,25 +2,12 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var app = express()
 var convert = require('convert-units')
-var http = require('http').Server(app); //init server
-var io = require('socket.io')(http); //init socket.io
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
-/*app.post('/', function (req, res) {
-  console.log("Incoming POST request:")
-  console.log("type = "+req.body.event.type)
-  console.log("content = "+req.body.event.text)
-  if(req.body.event.type="message"){
-    var msg=req.body.event.text
-    var regex = /.*[0-9]+ *ft|feet|foot|in|inch|yard|yd|mi|mile|pound|lb|ton|psi|atm.*//*ig;
-    if(msg === regex){
-      console.log("unit found")
-    }
-  }
-})*/
 
 app.post('/', function (req, res) {
   console.log("Incoming POST request:")
@@ -28,12 +15,12 @@ app.post('/', function (req, res) {
   res.set("Content-type", "application/json")
   if(req.body.command==="/convert"){
     var msg=req.body.text;
-    var regex = "/.*[0-9]+\.*[0-9]+ .*/ig"
+    var regex = "/.*[0-9]+\.*[0-9]* .+/ig"
     var params = msg.split(" ");
     if(msg !== regex){
       res.send({"response_type":"ephemeral", "text":"Oops! Something went wrong. Try \"/convert help\" for help."});
     }else if(params[0] === "help"){
-      res.send({"response_type":"in_channel", "text":"Usage: /convert \"value\" \"units from\" \"units to (optional)\"\nPlease use spaces :)"});
+      res.send({"response_type":"ephemeral", "text":"Usage: /convert \"value\" \"units from\" \"units to (optional)\"\nPlease use spaces :)"});
     }else if(params[2] !== null){
       var ans = convert(params[0]).from(params[1]).to(params[2]);
       res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans + " " + params[2]});
