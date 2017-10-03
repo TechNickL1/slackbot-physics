@@ -53,7 +53,7 @@ app.post('/', function (req, res) {
     if(params[1]==="help"){
       res.send({"response_type":"ephemeral", "text":"Commands:\n/convert"});
   }
-})
+});
 
 http.listen(app.get('port'), function(){
   console.log('listening on *:', app.get('port'));
