@@ -15,7 +15,7 @@ app.post('/', function (req, res) {
   res.set("Content-type", "application/json")
   if(req.body.command==="/convert"){
     var msg=req.body.text;
-    var regex = "/.*[0-9]+\.*[0-9]* .+/ig"
+    var regex = /.*[0-9]+\.*[0-9]* .+/ig
     var params = msg.split(" ");
     if(params[0] === "help"){
       res.send({"response_type":"ephemeral", "text":"Usage: /convert \"value\" \"units from\" \"units to (optional)\"\nPlease use spaces :)"});
