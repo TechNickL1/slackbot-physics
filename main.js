@@ -31,7 +31,7 @@ app.post('/', function (req, res) {
       res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans + " " + params[2]});
     }else if(params.length >= 3 && !(convert().possibilities().indexOf(params[2]) >= 0)){
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
-    }else if(!$.inArray(params[2], convert().possibilities())){
+    }else if(!(convert().possibilities().indexOf(params[2]) >= 0)){
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
     }else{
       var ans = convert(params[0]).from(params[1]).toBest()
