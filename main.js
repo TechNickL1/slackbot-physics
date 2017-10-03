@@ -21,7 +21,7 @@ app.post('/', function (req, res) {
     var params = msg.split(" ");
     if(params[0] === "help"){
       console.log("Help");
-      res.send({"response_type":"ephemeral", "text":"Usage: /convert [value] [units from] [units to (optional)]\nPlease use spaces :)\nFor units with exponents, omit the ^. Only simple exponents (cm2 etc) are valid."});
+      res.send({"response_type":"ephemeral", "text":"Usage: /convert [value] [units from] [units to (optional)]\nPlease use spaces and lowercase only :)\nFor units with exponents, omit the ^. Only simple exponents (cm2 etc) are valid."});
     }else if(!regex.test(msg)){
       console.log("invalid message, failed regex");
       res.send({"response_type":"ephemeral", "text":"Oops! Something went wrong. Try \"/convert help\" for help."});
@@ -37,8 +37,7 @@ app.post('/', function (req, res) {
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
     }else{
       var ans = convert(params[0]).from(params[1]).toBest();
-      console.log(ans)
-      res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans});
+      res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans.val + " " + ans.unit});
     }
   }else if(req.body.command==="/help"){
     res.send({"response_type":"ephemeral", "text":"Commands:\n/convert"});
