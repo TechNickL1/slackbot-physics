@@ -52,6 +52,7 @@ app.post('/', function (req, res) {
     var params = msg.split(" ");
     if(params[1]==="help"){
       res.send({"response_type":"ephemeral", "text":"Commands:\n/convert"});
+    }
   }
 });
 
