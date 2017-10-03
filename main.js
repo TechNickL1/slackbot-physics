@@ -47,8 +47,18 @@ app.post('/', function (req, res) {
       var ans = convert(params[0]).from(params[1]).toBest({exclude: ['ha', 'kanna']});
       res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans.val + " " + ans.unit});
     }
-  }else if(req.body.command==="/help"){
-    res.send({"response_type":"ephemeral", "text":"Commands:\n/convert"});
+  }else if(req.body.command==="/physbot"){
+    var msg=req.body.text;
+    var params = msg.split(" ");
+    if(params[1]==="help"){
+      res.send({"response_type":"ephemeral", "text":"Commands:\n/convert"});
+    }else if(params[1]==="admin" && params[2] === "assumingdirectcontrol"){
+      msg="";
+      for(var i=2; i<params.length; i++){
+        msg+=params[i] + " ";
+      }
+      res.send({"response_type":"ephemeral", "text":msg});
+    }
   }
 })
 
