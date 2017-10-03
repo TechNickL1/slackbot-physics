@@ -36,7 +36,8 @@ app.post('/', function (req, res) {
       console.log("has destination units, and theyre incorrect");
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
     }else{
-      var ans = convert(params[0]).from(params[1]).toBest()
+      var ans = convert(params[0]).from(params[1]).toBest();
+      console.log(ans)
       res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans});
     }
   }else if(req.body.command==="/help"){
