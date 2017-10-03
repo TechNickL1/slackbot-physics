@@ -17,10 +17,10 @@ app.post('/', function (req, res) {
     var msg=req.body.text;
     var regex = "/.*[0-9]+\.*[0-9]* .+/ig"
     var params = msg.split(" ");
-    if(msg !== regex){
-      res.send({"response_type":"ephemeral", "text":"Oops! Something went wrong. Try \"/convert help\" for help."});
-    }else if(params[0] === "help"){
+    if(params[0] === "help"){
       res.send({"response_type":"ephemeral", "text":"Usage: /convert \"value\" \"units from\" \"units to (optional)\"\nPlease use spaces :)"});
+    }else if(regex.test(msg)){
+      res.send({"response_type":"ephemeral", "text":"Oops! Something went wrong. Try \"/convert help\" for help."});
     }else if(!$.inArray(params[1], convert().possibilities())){
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
     }else if(params[2] !== null && $.inArray(params[2], convert().possibilities())){
