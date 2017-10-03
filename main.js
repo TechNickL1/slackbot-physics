@@ -57,7 +57,7 @@ app.post('/', function (req, res) {
       for(var i=2; i<params.length; i++){
         msg+=params[i] + " ";
       }
-      res.send({"response_type":"ephemeral", "text":msg});
+      res.send({"response_type":"in_channel", "text":msg});
     }
   }
 })
