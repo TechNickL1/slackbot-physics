@@ -57,6 +57,7 @@ app.post('/', function (req, res) {
       for(var i=2; i<params.length; i++){
         msg+=params[i] + " ";
       }
+      /console.log(msg);
       res.send({"response_type":"in_channel", "text":msg});
     }
   }
