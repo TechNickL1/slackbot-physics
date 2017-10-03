@@ -21,9 +21,13 @@ app.post('/', function (req, res) {
       res.send({"response_type":"ephemeral", "text":"Oops! Something went wrong. Try \"/convert help\" for help."});
     }else if(params[0] === "help"){
       res.send({"response_type":"ephemeral", "text":"Usage: /convert \"value\" \"units from\" \"units to (optional)\"\nPlease use spaces :)"});
-    }else if(params[2] !== null){
+    }else if(!$.inArray(params[1], convert().possibilities())){
+      res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
+    }else if(params[2] !== null && $.inArray(params[2], convert().possibilities())){
       var ans = convert(params[0]).from(params[1]).to(params[2]);
       res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans + " " + params[2]});
+    }else if(!$.inArray(params[2], convert().possibilities())){
+      res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
     }else{
       var ans = convert(params[0]).from(params[1]).toBest();
       res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans});
