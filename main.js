@@ -19,7 +19,7 @@ app.post('/', function (req, res) {
     var msg=req.body.text;
     var regex = /.*[0-9]+\.*[0-9]* .+/ig;
     var params = msg.split(" ");
-    console.log("index of unit in possible units :"+(convert().possibilities().indexOf(params[1]));
+    console.log("index of unit in possible units :"+(convert().possibilities().indexOf(params[1])));
     if(params[0] === "help"){
       res.send({"response_type":"ephemeral", "text":"Usage: /convert [value] [units from] [units to (optional)]\nPlease use spaces :)"});
     }else if(!regex.test(msg)){
