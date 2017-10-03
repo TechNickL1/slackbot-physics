@@ -26,10 +26,10 @@ app.post('/', function (req, res) {
       res.send({"response_type":"ephemeral", "text":"Oops! Something went wrong. Try \"/convert help\" for help."});
     }else if(!(convert().possibilities().indexOf(params[1]) >= 0)){
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
-    }else if(params[2] !== null && convert().possibilities().indexOf(params[2]) >= 0){
+    }else if(params.length >= 3 && convert().possibilities().indexOf(params[2]) >= 0){
       var ans = convert(params[0]).from(params[1]).to(params[2]);
       res.send({"response_type":"in_channel", "text":params[0] + " " + params[1] + " = " + ans + " " + params[2]});
-    }else if(params[2] !== null && !(convert().possibilities().indexOf(params[2]) >= 0)){
+    }else if(params.length >= 3 && !(convert().possibilities().indexOf(params[2]) >= 0)){
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
     }else if(!$.inArray(params[2], convert().possibilities())){
       res.send({"response_type":"ephemeral", "text":"Invalid units. Please use one of the following: " + convert().possibilities()});
